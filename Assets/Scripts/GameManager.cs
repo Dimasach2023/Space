@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
     {
         if(CheckRings())
         {
-            currentLevel++;
             NextLevel();
         }
     }
@@ -18,6 +17,13 @@ public class GameManager : MonoBehaviour
     }   
     void NextLevel()
     {
+        currentLevel = SceneManager.GetActiveScene().buildIndex + 1;
         SceneManager.LoadScene(currentLevel);
     }
+    public void RestartGame()
+    {
+        SceneManager.LoadScene("Game");
+    }
 }
+
+    

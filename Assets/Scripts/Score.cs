@@ -2,21 +2,27 @@ using UnityEngine;
 using TMPro;
 public class Score : MonoBehaviour
 {
-    
+    private GameObject[] rings;
     public TextMeshProUGUI scoreText;
-    private int ring = 0;
+    public TextMeshProUGUI bestScoreText;
+    private int ring;
+    public static int countRings = 0;
     private void Start()
     {
-        scoreText.text = "Rings: " + ring.ToString();
+        rings = GameObject.FindGameObjectsWithTag("Ring");
+        ring = rings.Length;
+        scoreText.text = ring.ToString();
+        bestScoreText.text = countRings.ToString();
     }
     private void OnTriggerExit(Collider other)
     {
         if(other.gameObject.CompareTag("Ring"))
         {
-            ring++;
+            countRings++;
+            ring--;
             Destroy(other.gameObject);
-            Debug.Log(ring);
-            scoreText.text = "Rings: " + ring.ToString();
+            scoreText.text = ring.ToString();
+            bestScoreText.text = countRings.ToString();
         }
     }
 }
